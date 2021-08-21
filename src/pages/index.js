@@ -7,7 +7,8 @@ import redirectTo from '@/util/redirectTo'
 import withAuth from '@components/withAuth'
 
 const Home = ({user}) => {
-    const [tickets, setTickets] = useState([])
+    const [known, setKnown] = useState([])
+    const [toLearn, setToLearn] = useState([])
     const truncate              = text => text.substr(0, 40) + (text.length > 40 ? '...' : '')
     const prioritySvg           = () => (
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 29.107 29.107"
@@ -19,43 +20,41 @@ const Home = ({user}) => {
     )
 
     useEffect(() => {
-        api().get('/api/tickets').then(response => setTickets(response.data))
+        // api().get('/api/tickets').then(response => setTickets(response.data))
+
+        api().get('/api/interests').then(response => {
+            console.log(response)
+            setKnown(response.data.known)
+            setToLearn(response.data.to_learn)
+        })
 
         console.log(user)
     }, [])
 
     return (
         <Layout>
+            <h1>Known</h1>
             <Table>
-                <thead>
-                    <TableRow>
-                        <TableCell isHeader={true}>Ticket #</TableCell>
-                        <TableCell isHeader={true}>Subject</TableCell>
-                        <TableCell isHeader={true}>User</TableCell>
-                        <TableCell isHeader={true}>Agent</TableCell>
-                        <TableCell isHeader={true}>Created At</TableCell>
-                        <TableCell isHeader={true}>Priority</TableCell>
-                    </TableRow>
-                </thead>
                 <tbody>
                     {
-                        tickets.map((ticket, i) => (
-                            <TableRow key={ticket.id} isEven={(i + 1) % 2 === 0}>
-                                <TableCell>{ticket.id}</TableCell>
-                                <TableCell>{truncate(ticket.subject)}</TableCell>
-                                <TableCell>{ticket.user.name}</TableCell>
-                                <TableCell>{ticket.agent.name}</TableCell>
-                                <TableCell>{ticket.createdAt}</TableCell>
-                                <TableCell>
-                                    <span className="flex">
-                                        {[...Array(ticket.priority + 1)].map((x, i) => (
-                                            <span key={i}>{prioritySvg()}</span>
-                                        ))}
-                                    </span>
-                                </TableCell>
+                        known.map((known, i) => (
+                            <TableRow key={i} isEven={(i + 1) % 2 === 0}>
+                                <TableCell>{known}</TableCell>
                             </TableRow>
                         ))
                     }
+                </tbody>
+            </Table>
+            <h1>To Learn</h1>
+            <Table>
+                <tbody>
+                {
+                    toLearn.map((known, i) => (
+                        <TableRow key={i} isEven={(i + 1) % 2 === 0}>
+                            <TableCell>{known}</TableCell>
+                        </TableRow>
+                    ))
+                }
                 </tbody>
             </Table>
         </Layout>

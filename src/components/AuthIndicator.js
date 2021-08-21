@@ -16,12 +16,20 @@ const AuthIndicator = ({isLoggedIn}) => {
     }
 
     return (
-        <Link href="/login">
+        <>
+            <Link href="/login">
             <a
                 className="px-3 py-2 rounded-md text-sm font-medium text-indigo-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700">
                 Sign In
             </a>
         </Link>
+            <Link href="/register">
+                <a
+                    className="px-3 py-2 rounded-md text-sm font-medium text-indigo-300 hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700">
+                    Sign Up
+                </a>
+            </Link>
+        </>
     )
 }
 
