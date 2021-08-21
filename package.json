@@ -20,6 +20,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "sass": "^1.26.10",
+    "simple-peer": "^9.11.0",
     "tailwindcss": "^1.8.6"
   },
   "devDependencies": {
@@ -32,7 +33,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8",
+    "laravel-echo": "^1.11.1",
     "postcss-selector-parser": "^6.0.2",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "pusher-js": "^7.0.3"
   }
 }
